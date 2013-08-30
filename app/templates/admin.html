@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		{% if title %} 
+		<title> {{title}} - Toastmasters @NYUAD</title>
+		{% else %}
+		<title>Toastmasters @ NYUAD</title>
+		{% endif %}
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Toastmasters @NYUAD">
+		<meta name="author" content="Joe Jean, NYUAD class 2016">
+
+		<!-- Le styles -->
+		
+		
+		<link href="{{ url_for('static', filename='bootstrap.min.css') }}" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+		
+		
+		
+		<style type="text/css">
+		  body {
+			padding-top: 5px;
+			padding-bottom: 10px;
+		  }
+		  
+		</style>
+	</head>
+    <body>
+	<header>
+	<a href="{{url_for('landing')}}"><img  src="{{ url_for('static', filename='banner2.jpg') }}" width="1400px" height="200px"  /></a>
+	</header>
+	<div class="container">
+	{% with messages = get_flashed_messages(category_filter=["error"]) %}
+			{%if messages %}
+				
+				<div class="alert alert-error page-header">
+					
+					{% for message in messages %}
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Oops!</strong> {{message}}
+					{% endfor %}
+					
+				</div>
+				
+			{% endif %}
+			
+			{% endwith %}
+			
+			{% with messages = get_flashed_messages(category_filter=["success"]) %}
+			{%if messages %}
+				
+				<div class="alert alert-success page-header">
+					
+					{% for message in messages %}
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<strong>Yay!</strong> {{message}}
+					{% endfor %}
+					
+				</div>
+				
+			{% endif %}
+			{% endwith %}
+	<div class="row">
+	<div class="span6">
+	<h2>List of Members</h2>
+	<table class="table table-striped  table-bordered">
+						<thead>
+							<tr class="hero-background">
+							  <th>#</th>
+							  <th>Name</th>
+							  <th>NetID </th>
+							</tr>
+						</thead>
+						  <tbody>
+							{% for m in members %}
+								<tr>
+								  <td>{{m.id}}</td>
+								  <td>{{m.name}}</td>
+								  <td>{{m.net_id}}</td>
+								</tr>
+							{% endfor %}
+						  </tbody>		
+	</table>
+	</div>
+	<div class="span5">
+    <h2>List of members emails</h2>
+			<form style="aligclass="form-horizontal" action="" method="post" value="write">
+						 
+						 
+						  <div class="control-group ">
+								
+								<div class="controls">
+									{% for m in members %}
+									<textarea rows="10">{{m.net_id}}@nyu.edu;</textarea>
+									{% endfor %}
+								</div>
+								
+						  </div>
+			</form>
+			
+	</div>
+	</div>
+	
+	
+	<footer>
+			<hr >
+			<p><strong>© Toastmasters @NYUAD 2013.</strong></p>
+			
+	</footer>
+	</div>
+	
+	<script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{{ url_for('static', filename = 'bootstrap.min.js') }}"></script>
+    </body>
+    </html>
