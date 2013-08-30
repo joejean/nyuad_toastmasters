@@ -94,9 +94,11 @@
 						  <div class="control-group ">
 								
 								<div class="controls">
+									<textarea rows="10">
 									{% for m in members %}
-									<textarea rows="10">{{m.net_id}}@nyu.edu;</textarea>
+									{{m.net_id}}@nyu.edu;
 									{% endfor %}
+									</textarea>
 								</div>
 								
 						  </div>
